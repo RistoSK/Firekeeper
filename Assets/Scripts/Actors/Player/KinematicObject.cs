@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
@@ -10,7 +9,7 @@ public class KinematicObject : MonoBehaviour
     private NavMeshAgent _playerAgent;
     private Vector3 _forward;
 
-    public UnityAction OnPlayerDied;
+    public UnityAction onPlayerDied;
 
     private void Start()
     {
@@ -21,28 +20,19 @@ public class KinematicObject : MonoBehaviour
     public RaycastHit GetClickPosition(LayerMask layer, out bool hitSomething)
     {
         Ray ray = CameraFollow.MainCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitPosition;
-
+        
         // Need to pass a maxDistance float in order to pass the layer as a parameter
-        hitSomething = Physics.Raycast(ray, out hitPosition, 1000f, layer);
+        hitSomething = Physics.Raycast(ray, out var hitPosition, 1000f, layer);
 
         return hitPosition;
     }
 
     public RaycastHit IsPlayerReadyToInteract(float interactionRange, LayerMask layer, out bool hitSomething)
     {
-        Vector3 direction = transform.TransformDirection(_forward);
-        RaycastHit hit;
+        Transform playerTransform;
+        Vector3 direction = (playerTransform = transform).TransformDirection(_forward);
 
-        hitSomething = Physics.Raycast(transform.position, direction, out hit, interactionRange, layer);
-        if (hitSomething)
-        {
-            Debug.DrawRay(transform.position, direction, Color.red, 1f);
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, direction, Color.blue, 1f);
-        }
+        hitSomething = Physics.Raycast(playerTransform.position, direction, out var hit, interactionRange, layer);
         
         return hit;  
     }
@@ -70,7 +60,7 @@ public class KinematicObject : MonoBehaviour
 
         if (enemy != null)//&& enemy.IsEnemyAlive())
         {
-            OnPlayerDied?.Invoke();
+            onPlayerDied?.Invoke();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -9,7 +10,6 @@ public class PlayerController : MonoBehaviour
     public enum PlayerState
     {
         Kinematic,
-        Building,
         AboutToRepairFence,
         Interacting,
         AboutToInteract,
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
         PlayerPosition = transform.position;
 
-        _kinematicObject.OnPlayerDied += PlayerDied;
+        _kinematicObject.onPlayerDied += PlayerDied;
         RepairFencePopUpController.RepairFencePopUpControllerInstance.OnFencePopUpClicked += FencePopUpClicked;
     }
 
@@ -105,8 +105,7 @@ public class PlayerController : MonoBehaviour
 
         if (PlayerCurrentState == PlayerState.AboutToInteract)
         {
-            bool hitsomething;
-            RaycastHit hit = _kinematicObject.IsPlayerReadyToInteract(_interactionRange, _interactibleLayers, out hitsomething);
+            RaycastHit hit = _kinematicObject.IsPlayerReadyToInteract(_interactionRange, _interactibleLayers, out var hitsomething);
 
             if (hitsomething)
             {
@@ -119,7 +118,7 @@ public class PlayerController : MonoBehaviour
 
         if (PlayerCurrentState == PlayerState.AboutToRepairFence)
         {
-            if (PlayerPosition.x == _playerAgent.destination.x && PlayerPosition.z == _playerAgent.destination.z)
+            if (Math.Abs(PlayerPosition.x - _playerAgent.destination.x) < 0.1f && Math.Abs(PlayerPosition.z - _playerAgent.destination.z) < 0.1f)
             {
                 _kinematicObject.StopMoving();
                 _interactableManager.InitiateObjectCreation(PopUp.PopUpType.RepairFence);
@@ -154,6 +153,5 @@ public class PlayerController : MonoBehaviour
 
         _kinematicObject.Move(playerRepairTargetTransform.position);
         _interactableManager.InteractableObject = fence;
-
     }
 }
