@@ -9,7 +9,7 @@ public class TreeManager : MonoBehaviour
     [SerializeField] private int _xMinimunPosition = 15;
     [SerializeField] private int _zMinimunPosition = 10;
 
-    private HashSet<int> _treePositionsOnGrid = new HashSet<int>();
+    private readonly HashSet<int> _treePositionsOnGrid = new HashSet<int>();
     private Vector3 _treePosition;
 
     private void Start()

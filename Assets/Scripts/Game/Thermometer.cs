@@ -25,19 +25,16 @@ public class Thermometer : MonoBehaviour
     private void NightTimeStarted()
     {
         StopAllCoroutines();
-
-        StartCoroutine(NightTimeTempature());
-
+        StartCoroutine(NightTimeTemperature());
     }
 
     private void DayTimeStarted()
     {
         StopAllCoroutines();
-
-        StartCoroutine(DayTimeTempature());
+        StartCoroutine(DayTimeTemperature());
     }
 
-    private IEnumerator NightTimeTempature()
+    private IEnumerator NightTimeTemperature()
     {
         while (true)
         {
@@ -60,7 +57,7 @@ public class Thermometer : MonoBehaviour
         }
     }
 
-    private IEnumerator DayTimeTempature()
+    private IEnumerator DayTimeTemperature()
     {
         _bIsOnMaxTempeture = false;
         while (!_bIsOnMaxTempeture)
@@ -75,10 +72,11 @@ public class Thermometer : MonoBehaviour
     {
         _thermoSlider.value += 0.25f;
 
-        if (_thermoSlider.value == 1)
+        if (_thermoSlider.value != 1)
         {
-            _bIsOnMaxTempeture = true;
-            _thermoUi.SetActive(false);
+            return;
         }
+        _bIsOnMaxTempeture = true;
+        _thermoUi.SetActive(false);
     }
 }

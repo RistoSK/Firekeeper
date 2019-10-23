@@ -6,5 +6,4 @@
 
     public static readonly string NightsRemainingLastDay = "LAST DAY!";
     public static readonly string Empty = "";
-
 }

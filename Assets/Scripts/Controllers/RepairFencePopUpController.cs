@@ -29,7 +29,7 @@ public class RepairFencePopUpController : MonoBehaviour
         }
     }
 
-    public void FencePopUpClicked(GameObject fence, Transform playerRepairTargetTransform)
+    private void FencePopUpClicked(GameObject fence, Transform playerRepairTargetTransform)
     {
         OnFencePopUpClicked?.Invoke(fence, playerRepairTargetTransform);
     }

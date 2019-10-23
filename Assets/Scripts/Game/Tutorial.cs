@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Tutorial : MonoBehaviour
 {
-
     public GameObject buildMessage;
     public float buildMessageLength;
     public GameObject surviveMessage;
@@ -30,7 +29,6 @@ public class Tutorial : MonoBehaviour
         surviveMessage.SetActive(true);
         yield return new WaitForSeconds(surviveMessageLength);
         surviveMessage.SetActive(false);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
-
 }

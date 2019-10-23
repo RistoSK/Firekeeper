@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,7 +52,7 @@ public class FenceHealth : MonoBehaviour
 
     public bool IsFenceDamaged()
     {
-        return _currentHealth != _maxHealth;
+        return Math.Abs(_currentHealth - _maxHealth) > 0;
     }
 
     public void RestoreHealth()

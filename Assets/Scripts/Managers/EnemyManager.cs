@@ -6,7 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private GameObject _enemy;
 
-    protected List<NavMeshAgent> _enemiesNavAgentsList;
+    private List<NavMeshAgent> _enemiesNavAgentsList;
 
     private void Start()
     {

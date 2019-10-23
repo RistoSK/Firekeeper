@@ -63,14 +63,7 @@ public class CameraFollow : MonoBehaviour
             targetScreenSpace = _mainCamera.ScreenToViewportPoint(targetScreenSpace);
             float distanceToCenter = Vector2.Distance(new Vector2(0.5f, 0.5f), targetScreenSpace);
 
-            if (distanceToCenter > _invalidBound)
-            {
-                _canFollow = true;
-            }
-            else
-            {
-                _canFollow = false;
-            }
+            _canFollow = distanceToCenter > _invalidBound;
 
             if (distanceToCenter > 1)
             {
@@ -79,12 +72,14 @@ public class CameraFollow : MonoBehaviour
                 transform.position = PlayerController.PlayerPosition + _movementOffset;
             }
 
-            if (_canFollow)
+            if (!_canFollow)
             {
-                transform.position = PlayerController.PlayerPosition + _offset;
-
-                OnCameraMoved?.Invoke();
+                return;
             }
+            
+            transform.position = PlayerController.PlayerPosition + _offset;
+
+            OnCameraMoved?.Invoke();
         }
     }
 }

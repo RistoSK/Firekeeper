@@ -6,7 +6,7 @@ public class GameSettings : MonoBehaviour
 {
     [SerializeField] private GameObject _gameOverCanvas;
 
-    public static GameSettings GameSettingsInstance { get; private set; }
+    private static GameSettings GameSettingsInstance { get; set; }
 
     private static GameObject GameOverCanvas => GameSettingsInstance._gameOverCanvas;
 

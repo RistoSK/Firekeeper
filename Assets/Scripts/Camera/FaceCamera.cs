@@ -4,10 +4,12 @@ public class FaceCamera : MonoBehaviour
 {
     private void OnEnable()
     {
-        transform.LookAt(CameraFollow.MainCamera.transform);
-        Vector3 eulers = transform.eulerAngles;
-        eulers.x = 0;
-        eulers.z = 0;
-        transform.eulerAngles = eulers;
+        Transform cameraTransform;
+        
+        (cameraTransform = transform).LookAt(CameraFollow.MainCamera.transform);
+        Vector3 euler = cameraTransform.eulerAngles;
+        euler.x = 0;
+        euler.z = 0;
+        cameraTransform.eulerAngles = euler;
     }
 }

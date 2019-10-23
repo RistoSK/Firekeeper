@@ -89,9 +89,10 @@ public class DayNightCycleController : MonoBehaviour
                 //get percentage of current day time
                 _dayProgress = _time / _daySeconds;
                 //reset sun rotation
-                _sunTransform.rotation = _sunRotationStored;
+                var sunRotation = _sunRotationStored;
                 //rotate the sun
-                _sunTransform.rotation *= Quaternion.Euler( transform.right * (_dayProgress * 180));
+                sunRotation *= Quaternion.Euler( transform.right * (_dayProgress * 180));
+                _sunTransform.rotation = sunRotation;
                 //set the dayProgress
                 if (_dayProgress > 0.8)
                 {
@@ -116,9 +117,10 @@ public class DayNightCycleController : MonoBehaviour
                 //get percentage of current day time
                 _nightProgress = _time / _nightSeconds;
                 //reset sun rotation
-                _moonTransform.rotation = _moonRotationStored;
+                var moonRotation = _moonRotationStored;
                 //rotate the sun
-                _moonTransform.rotation *= Quaternion.Euler(transform.right * (_nightProgress * 180));
+                moonRotation *= Quaternion.Euler(transform.right * (_nightProgress * 180));
+                _moonTransform.rotation = moonRotation;
             }
         }
 
@@ -227,7 +229,6 @@ public class DayNightCycleController : MonoBehaviour
             _sun.intensity = luminance;
             yield return new WaitForFixedUpdate();
         }
-      
     }
 
     private IEnumerator TurnDownSun(float time)

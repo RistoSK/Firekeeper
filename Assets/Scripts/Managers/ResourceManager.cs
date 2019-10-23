@@ -28,11 +28,13 @@ public class ResourceManager : MonoBehaviour
 
     private void Awake()
     {
-        _currentResources = new Dictionary<ResourceType, int>();
+        _currentResources = new Dictionary<ResourceType, int>
+        {
+            {ResourceType.Wood, _woodAmount},
+            {ResourceType.SpaceshipParts, _spaceshipPartsAmount},
+            {ResourceType.AttachedSpaceshipParts, _attahedSpaceshipParts}
+        };
 
-        _currentResources.Add(ResourceType.Wood, _woodAmount);
-        _currentResources.Add(ResourceType.SpaceshipParts, _spaceshipPartsAmount);
-        _currentResources.Add(ResourceType.AttachedSpaceshipParts, _attahedSpaceshipParts);
 
         UpdateDisplay();
     }
@@ -52,13 +54,12 @@ public class ResourceManager : MonoBehaviour
 
     public int GetResourcesAmount(ResourceType type)
     {
-        if (!_currentResources.ContainsKey(type))
+        if (_currentResources.ContainsKey(type))
         {
-            Debug.LogError("Resource type " + type + " does not exist");
-            return 0;
+            return _currentResources[type];
         }
-
-        return _currentResources[type];
+        Debug.LogError($"Resource type {type} does not exist");
+        return 0;
     }
 
 
