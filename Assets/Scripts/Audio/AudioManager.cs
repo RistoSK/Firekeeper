@@ -22,23 +22,16 @@ public class AudioManager : MonoBehaviour
     {
         if (!_audio.isPlaying)
         {
-            if (DayNightCycleController.IsDay)
-            {
-                PlayNext(_daySongs);
-            }
-            else
-            {
-                PlayNext(_nightSongs);
-            }
+            PlayNext(DayNightCycleController.IsDay ? _daySongs : _nightSongs);
         }
     }
 
-    public void PlayDayAudio()
+    private void PlayDayAudio()
     {
         PlayNext(_daySongs);
     }
 
-    public void PlayNightAudio()
+    private void PlayNightAudio()
     {
         PlayNext(_nightSongs);
     }
