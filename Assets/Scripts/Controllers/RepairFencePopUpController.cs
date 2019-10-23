@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class RepairFencePopUpController : MonoBehaviour
 {
-
     [SerializeField] private RepairFencePopUp[] _repairFencePopUps;
 
     public static RepairFencePopUpController RepairFencePopUpControllerInstance { get; private set; }
@@ -36,7 +32,5 @@ public class RepairFencePopUpController : MonoBehaviour
     public void FencePopUpClicked(GameObject fence, Transform playerRepairTargetTransform)
     {
         OnFencePopUpClicked?.Invoke(fence, playerRepairTargetTransform);
-
-
     }
 }
