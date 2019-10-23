@@ -6,11 +6,11 @@ public abstract class BaseState
     protected BaseState(GameObject gameObject)
     {
         this.gameObject = gameObject;
-        this.transform = gameObject.transform;
+        transform = gameObject.transform;
     }
 
     protected GameObject gameObject;
-    protected Transform transform;
+    protected readonly Transform transform;
 
     public abstract void OnEnter();
     public abstract Type Tick();

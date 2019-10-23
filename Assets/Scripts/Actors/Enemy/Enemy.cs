@@ -9,21 +9,21 @@ public class Enemy : EnemyManager
 {   
     private NavMeshAgent _agent;
 
-    private FSG.MeshAnimator.MeshAnimator _animator;
-    public EnemyManager _enemyManager;
-    public FenceHealth _targetsHealth;
+    private MeshAnimator _animator;
+    public EnemyManager enemyManager;
+    public FenceHealth targetsHealth;
 
-    public UnityAction OnCollidedWithFence;
+    public UnityAction onCollidedWithFence;
 
     private void Start()
     {
         _animator = GetComponentInChildren<MeshAnimator>();
-        _enemyManager = GetComponentInParent<EnemyManager>();
+        enemyManager = GetComponentInParent<EnemyManager>();
         
         InitialiseStateMachine();
     }
 
-    public void InitialiseStateMachine()
+    private void InitialiseStateMachine()
     {
         var states = new Dictionary<Type, BaseState>()
         {
@@ -41,23 +41,20 @@ public class Enemy : EnemyManager
 
         if (health != null)
         {
-            _targetsHealth = health;
-            OnCollidedWithFence?.Invoke();
+            targetsHealth = health;
+            onCollidedWithFence?.Invoke();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (_targetsHealth != null)
-        {
-            _targetsHealth = null;
-        }
+        targetsHealth = null;
     }
 
     public void Attack()
     {
         _animator.Play(0);
-        _targetsHealth.DealDamage(EnemySettings.AttackDamage);
+        targetsHealth.DealDamage(EnemySettings.AttackDamage);
     }
 
     public void PrepareToAttack()

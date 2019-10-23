@@ -5,7 +5,7 @@ using System;
 
 public class DeadState : BaseState
 {
-    private Enemy _enemy;
+    private readonly Enemy _enemy;
 
     public DeadState(Enemy enemy) : base(enemy.gameObject)
     {

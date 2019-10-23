@@ -15,7 +15,7 @@ public class EnemySettings : MonoBehaviour
     [SerializeField] private float _xEnemyPositionAxisRange;
     [SerializeField] private float _zEnemyPositionAxisRange;
 
-    public static EnemySettings EnemySettingsInstance { get; private set; }
+    private static EnemySettings EnemySettingsInstance { get; set; }
 
     public static float EnemySpeed => EnemySettingsInstance._enemySpeed;
 

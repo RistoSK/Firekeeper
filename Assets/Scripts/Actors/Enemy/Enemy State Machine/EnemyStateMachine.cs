@@ -8,7 +8,7 @@ public class EnemyStateMachine : MonoBehaviour
 {
     private Dictionary<Type, BaseState> _enemyStates;
 
-    public BaseState CurrentState { get; private set; }
+    private BaseState CurrentState { get; set; }
     public event Action<BaseState> OnStateChanged;
 
     public void SetState(Dictionary<Type, BaseState> states)

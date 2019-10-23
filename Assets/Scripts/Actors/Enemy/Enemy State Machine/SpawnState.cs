@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpawnState : BaseState
 {
-    private Enemy _enemy;
+    private readonly Enemy _enemy;
 
     public SpawnState(Enemy enemy) : base(enemy.gameObject)
     {
@@ -20,6 +20,7 @@ public class SpawnState : BaseState
     public override Type Tick()
     {
         Vector3 enemySpawnPosition = transform.position;
+        
         enemySpawnPosition.y = 0;
         enemySpawnPosition.x = UnityEngine.Random.Range(-EnemySettings.xPositionRange, EnemySettings.xPositionRange);
 
@@ -45,8 +46,10 @@ public class SpawnState : BaseState
             enemySpawnPosition.z -= UnityEngine.Random.Range(EnemySettings.MinRadius, EnemySettings.MinRadius * 2);
         }
 
-        enemySpawnPosition.y = _enemy.transform.position.y;
-        _enemy.transform.position = enemySpawnPosition;
+        var enemyTransform = _enemy.transform;
+        
+        enemySpawnPosition.y = enemyTransform.position.y;
+        enemyTransform.position = enemySpawnPosition;
 
         return typeof(ChaseState);
     }

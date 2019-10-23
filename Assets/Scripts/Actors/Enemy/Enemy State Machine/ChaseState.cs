@@ -19,7 +19,7 @@ public class ChaseState : BaseState
 
     public override void OnEnter()
     {
-        _enemy.OnCollidedWithFence += OnFenceCollision;
+        _enemy.onCollidedWithFence += OnFenceCollision;
 
         _fenceCollision = false;     
     }
