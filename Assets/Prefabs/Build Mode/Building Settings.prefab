@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6045250524388321973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6045250524388321611}
+  - component: {fileID: 6045250524388321972}
+  m_Layer: 0
+  m_Name: Building Settings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6045250524388321611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6045250524388321973}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6045250524388321972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6045250524388321973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e33891456d796a4a80bed90f46193a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wall: {fileID: 1700165264904042919, guid: d8cbb8f9a5fda024a9dbbacbbaaf3c75, type: 3}
+  _tempWall: {fileID: 1700165264904042919, guid: a1966c4cea4eb924b85864b42e292fe8,
+    type: 3}
+  _singleColor: {r: 0.02616591, g: 0.7924528, b: 0.10786328, a: 0}
+  _drawColor: {r: 0.06132078, g: 0.42961222, b: 1, a: 0}
+  _removeColor: {r: 0.9811321, g: 0.06016379, b: 0.06016379, a: 0}
+  _tempWallsLayerMask:
+    serializedVersion: 2
+    m_Bits: 524288
+  _wallLayerMask:
+    serializedVersion: 2
+    m_Bits: 262144
+  _cellLayerMask:
+    serializedVersion: 2
+    m_Bits: 261943

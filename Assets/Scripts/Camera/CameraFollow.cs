@@ -22,7 +22,7 @@ public class CameraFollow : MonoBehaviour
     public static CameraFollow CameraFollowInstance { get; private set; }
 
     public static Camera MainCamera => CameraFollowInstance._mainCamera;
-
+    
     private void Awake()
     {
         if (CameraFollowInstance != null)
@@ -39,7 +39,8 @@ public class CameraFollow : MonoBehaviour
 
     private void Start()
     {
-        _offset = transform.position - Vector3.zero;
+        // Camera position - center of camp position
+        _offset = transform.position - new Vector3(500, 0, 520);
     }
 
     private void LateUpdate()
@@ -49,13 +50,13 @@ public class CameraFollow : MonoBehaviour
             return;
         }
 
-        float distanceToCamp = Vector3.Distance(Vector3.zero, PlayerController.PlayerPosition);
+        float distanceToCamp = Vector3.Distance(new Vector3(500, 0, 520), PlayerController.PlayerPosition);
 
         if (distanceToCamp < _campSnapDistance)
         {
            OnCameraOnCamp?.Invoke();
-
-           transform.position = Vector3.zero + _offset; 
+           // Camera position
+           transform.position = new Vector3(497.9f, 21.1f, 496.2f);
         }
         else
         {
@@ -69,6 +70,7 @@ public class CameraFollow : MonoBehaviour
             {
                 //reset
                 _movementOffset = _offset;
+                
                 transform.position = PlayerController.PlayerPosition + _movementOffset;
             }
 
@@ -76,8 +78,9 @@ public class CameraFollow : MonoBehaviour
             {
                 return;
             }
-            
+
             transform.position = PlayerController.PlayerPosition + _offset;
+
 
             OnCameraMoved?.Invoke();
         }

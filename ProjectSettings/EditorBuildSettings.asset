@@ -11,7 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Firekeeper.unity
     guid: 647ba3516a1079a45836aea0ceadef03
-  - enabled: 1
-    path: Assets/Scenes/OLD/Firekeeper Risto Without Debug.unity
-    guid: 407145038c4bc0046b9d9d970b2b892a
   m_configObjects: {}

@@ -15,15 +15,15 @@ public class Spaceship : MonoBehaviour
 
     private void Update()
     {
-        SetHudPosition(); 
+        //SetHudPosition(); 
     }
 
     private void SetHudPosition()
     {
-        Vector2 screenPosition = CameraFollow.MainCamera.WorldToScreenPoint(_hudSpawnTransform.position);
+        Vector2 screenPosition = CameraManager.CurrentCamera.WorldToScreenPoint(_hudSpawnTransform.position);
         RectTransform rect = _spaceshipPartsHud.GetComponent<RectTransform>();
         Vector2 localPosition;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(_uiCanvas.GetComponent<RectTransform>(), screenPosition, CameraFollow.MainCamera, out localPosition);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(_uiCanvas.GetComponent<RectTransform>(), screenPosition, CameraManager.CurrentCamera, out localPosition);
         _spaceshipPartsHud.transform.localPosition = localPosition;
     }
 

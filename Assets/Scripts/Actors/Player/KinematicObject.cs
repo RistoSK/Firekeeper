@@ -19,7 +19,7 @@ public class KinematicObject : MonoBehaviour
 
     public RaycastHit GetClickPosition(LayerMask layer, out bool hitSomething)
     {
-        Ray ray = CameraFollow.MainCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = CameraManager.CurrentCamera.ScreenPointToRay(Input.mousePosition);
         
         // Need to pass a maxDistance float in order to pass the layer as a parameter
         hitSomething = Physics.Raycast(ray, out var hitPosition, 1000f, layer);
@@ -44,11 +44,10 @@ public class KinematicObject : MonoBehaviour
         transform.LookAt(_playerAgent.steeringTarget);
     }
 
-    public void StopMoving()
+    public void SetPlayerCanMove(bool moving)
     {
-        _playerAgent.enabled = false;
+        _playerAgent.enabled = moving;
     }
-
     public bool IsPlayerWithinInteractionRange(Vector3 interactableObjectPosition, float interactionRange)
     {
         return Vector3.Distance(interactableObjectPosition, transform.position) < interactionRange;       

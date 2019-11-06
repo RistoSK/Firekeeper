@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
 
         _kinematicObject.onPlayerDied += PlayerDied;
         RepairFencePopUpController.RepairFencePopUpControllerInstance.OnFencePopUpClicked += FencePopUpClicked;
+        GameManager.OnModeChanged += GameModeChanged;
     }
 
     private void Update()
@@ -69,10 +70,15 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
+            if (GameManager.CurrentGameMode == GameManager.GameMode.BuildingMode)
+            {
+                return;
+            }
+            
             if (!_playerAgent.enabled)
             {
                 _playerAgent.path.ClearCorners();
-                _playerAgent.enabled = true;
+                _kinematicObject.SetPlayerCanMove(true);
             }
 
             _rootPopUpController.DisablePopUps();
@@ -120,7 +126,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Math.Abs(PlayerPosition.x - _playerAgent.destination.x) < 0.1f && Math.Abs(PlayerPosition.z - _playerAgent.destination.z) < 0.1f)
             {
-                _kinematicObject.StopMoving();
+                _kinematicObject.SetPlayerCanMove(false);
                 _interactableManager.InitiateObjectCreation(PopUp.PopUpType.RepairFence);
             }
         }
@@ -148,10 +154,23 @@ public class PlayerController : MonoBehaviour
         if (!_playerAgent.enabled)
         {
             _playerAgent.path.ClearCorners();
-            _playerAgent.enabled = true;
+            _kinematicObject.SetPlayerCanMove(true);
         }
 
         _kinematicObject.Move(playerRepairTargetTransform.position);
         _interactableManager.InteractableObject = fence;
+    }
+
+    private void GameModeChanged(GameManager.GameMode gameMode)
+    {
+        switch (gameMode)
+        {
+            case GameManager.GameMode.MainGame:
+                _kinematicObject.SetPlayerCanMove(true);
+                break;
+            case GameManager.GameMode.BuildingMode:
+                _kinematicObject.SetPlayerCanMove(false);
+                break;
+        }
     }
 }

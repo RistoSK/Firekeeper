@@ -24,7 +24,7 @@ public class ResourceManager : MonoBehaviour
 
     private int _maxSpaceshipParts;
 
-    public UnityAction OnWoodAmountChanged;
+    public event Action OnWoodAmountChanged;
 
     private void Awake()
     {

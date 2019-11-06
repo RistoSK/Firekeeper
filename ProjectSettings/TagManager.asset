@@ -23,8 +23,8 @@ TagManager:
   - CampGround
   - Spaceship
   - EnemyBody
-  - 
-  - 
+  - Wall
+  - TempWall
   - 
   - 
   - 

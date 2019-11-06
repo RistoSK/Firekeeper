@@ -56,14 +56,13 @@ public class RootPopUpController : MonoBehaviour
         popUp.SetActive(true);
 
         Vector3 tempHitPoint = hit.point;
-        Vector3 viewPortPoint = CameraFollow.MainCamera.WorldToViewportPoint(tempHitPoint);
+        Vector3 viewPortPoint = CameraManager.CurrentCamera.WorldToViewportPoint(tempHitPoint);
 
-        Vector3 screenSpaceCord = CameraFollow.MainCamera.WorldToScreenPoint(hit.point);
+        Vector3 screenSpaceCord = CameraManager.CurrentCamera.WorldToScreenPoint(hit.point);
         RectTransform canvasRectTransform = _popUpCanvas.GetComponent<RectTransform>();
         Vector3 SpawnPosition;
 
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasRectTransform, screenSpaceCord,
-            CameraFollow.MainCamera, out SpawnPosition);
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasRectTransform, screenSpaceCord, CameraManager.CurrentCamera, out SpawnPosition);
 
         popUp.transform.position = SpawnPosition;
 

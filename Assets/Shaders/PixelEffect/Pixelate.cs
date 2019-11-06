@@ -6,43 +6,37 @@ using UnityEngine.Rendering;
 public class Pixelate : MonoBehaviour
 {
     [SerializeField] private Material _imageEffectMaterial;
-    [SerializeField] private int _targetWidth = 450;
+    [SerializeField] private int downsample = 4;
     [SerializeField] private CameraEvent _camEvent;
 
     private RenderTexture _renderTexture;
 
     private void Start()
     {
-        CommandBuffer commandBuffer = new CommandBuffer();
-        commandBuffer.name = "Pixelate";
+        CommandBuffer commandBuffer = new CommandBuffer {name = "Pixelate"};
 
-        int downsample =(int)(CameraFollow.MainCamera.pixelWidth / _targetWidth);
+        //int downsample = CameraManager.CurrentCamera.pixelWidth / _targetWidth;
 
-        //check if modulus of downsample rate is a multiple of two, if not, add 1
-        if (downsample % 2 != 0)
+
+
+        int pixelWidth = CameraManager.CurrentCamera.pixelWidth;
+        int pixelHeight = CameraFollow.MainCamera.pixelHeight;
+
+        _renderTexture = new RenderTexture(pixelWidth / downsample, pixelHeight / downsample, 0)
         {
-            downsample++;
-        }
-
-        if (downsample <= 2)
-        {
-            downsample = 4;
-        }
-        
-        _renderTexture = new RenderTexture((int)(CameraFollow.MainCamera.pixelWidth / downsample), (int)(CameraFollow.MainCamera.pixelHeight / downsample), 0);
-        _renderTexture.filterMode = FilterMode.Point;
+            filterMode = FilterMode.Point
+        };
         RenderTargetIdentifier rtID = new RenderTargetIdentifier(_renderTexture);
 
-        RenderTexture screenCopy = screenCopy = new RenderTexture(CameraFollow.MainCamera.pixelWidth, CameraFollow.MainCamera.pixelHeight, 0);
-        screenCopy.filterMode = FilterMode.Point;
-        
+        RenderTexture screenCopy = new RenderTexture(pixelWidth, pixelHeight, 0) {filterMode = FilterMode.Point};
+
         commandBuffer.SetRenderTarget(rtID);
         commandBuffer.ClearRenderTarget(true, true, new Color(0, 0, 0, 0), 1f);
 
         commandBuffer.Blit(BuiltinRenderTextureType.CameraTarget, screenCopy);
         commandBuffer.Blit(screenCopy, rtID, _imageEffectMaterial);
 
-        CameraFollow.MainCamera.AddCommandBuffer(_camEvent, commandBuffer);
+        CameraManager.CurrentCamera.AddCommandBuffer(_camEvent, commandBuffer);
     }
 
     private void OnRenderImage(RenderTexture source, RenderTexture destination)

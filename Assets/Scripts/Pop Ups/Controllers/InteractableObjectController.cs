@@ -13,12 +13,12 @@ public class InteractableObjectController : MonoBehaviour
     {
         if (InteractableObject.GetComponent<Tree>() != null)
         {
-            kinematicObject.StopMoving();
+            kinematicObject.SetPlayerCanMove(false);
             _buildView.TreeClicked(interactableHit);
         }
         else if (InteractableObject.GetComponent<Base>() != null)
         {
-            kinematicObject.StopMoving();
+            kinematicObject.SetPlayerCanMove(false);
             _buildView.BaseClicked(interactableHit);
         }
         else if (InteractableObject.GetComponent<SpaceshipPart>() != null)
